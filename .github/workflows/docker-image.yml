@@ -26,7 +26,7 @@ jobs:
       - name: Check if "latest" tag exists
         id: check_latest
         run: |
-          TAG_EXISTS=$(curl -s "https://hub.docker.com/v2/repositories/${{ secrets.DOCKER_USERNAME }}/1854-Cholera-Outbreak-London-Advanced-1/tags" \
+          TAG_EXISTS=$(curl -s "https://hub.docker.com/v2/repositories/${{ secrets.DOCKER_USERNAME }}/cholera-outbreak-london-advanced-1/tags" \
           | jq -r '.results[].name' | grep -w "latest" || true)
 
           if [[ -z "$TAG_EXISTS" ]]; then
