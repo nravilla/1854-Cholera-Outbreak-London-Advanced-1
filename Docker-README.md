@@ -38,10 +38,12 @@ This should display a confirmation message that Docker is working.
 
 ---
 
-## 3. Pull the `1854-Cholera-Outbreak-London-Basic` Docker Image
+## 3. Pull the `1854-Cholera-Outbreak-London-Advanced-1
+` Docker Image
 Now, pull the latest version of the **Cholera Outbreak London** image from Docker Hub:
 ```bash
-docker pull your-dockerhub-username/1854-cholera-outbreak-london-basic:latest
+docker pull your-dockerhub-username/1854-Cholera-Outbreak-London-Advanced-1
+:latest
 ```
 Replace `your-dockerhub-username` with the actual Docker Hub username where the image is hosted.
 
@@ -50,7 +52,8 @@ Replace `your-dockerhub-username` with the actual Docker Hub username where the 
 ## 4. Run the Docker Image
 To start the container and run the application, use:
 ```bash
-docker run -d -p 8888:8888 your-dockerhub-username/1854-cholera-outbreak-london-basic:latest
+docker run -d -p 8888:8888 your-dockerhub-username/1854-Cholera-Outbreak-London-Advanced-1
+:latest
 ```
 - `-d` runs the container in the background.
 - `-p 8888:8888` maps the container’s port `8888` to your local machine’s port `8888`.
@@ -86,7 +89,8 @@ docker rm <container_id>
 ## 7. Remove the Image (If Needed)
 To remove the image from your system:
 ```bash
-docker rmi your-dockerhub-username/1854-cholera-outbreak-london-basic:latest
+docker rmi your-dockerhub-username/1854-Cholera-Outbreak-London-Advanced-1
+:latest
 ```
 
 ---
@@ -98,4 +102,5 @@ docker rmi your-dockerhub-username/1854-cholera-outbreak-london-basic:latest
 ✅ Access the application in a browser  
 ✅ Stop and clean up the container if necessary  
 
-Now you can run the **1854-Cholera-Outbreak-London-Basic** Docker container easily! Let us know if you need further assistance.
+Now you can run the **1854-Cholera-Outbreak-London-Advanced-1
+** Docker container easily! Let us know if you need further assistance.
