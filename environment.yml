@@ -1,4 +1,4 @@
-name: advanced1
+name : advanced1
 channels:
   - conda-forge
 channel_priority: strict
@@ -12,7 +12,7 @@ dependencies:
   - matplotlib>=3.8
   - pandas>=2.1
   - geopandas>=0.14
-  - shapely>=2.0
+  - shapely=1.8
   - poppler
   - numpy>=1.25
   - alphashape>=1.3
