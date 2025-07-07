@@ -2,20 +2,23 @@ FROM jupyter/base-notebook
 
 USER root
 
-# Use mamba in base env for faster installs
+# Install mamba
 RUN conda install -n base -c conda-forge mamba -y
 
-# Set workdir and copy files
-WORKDIR /home/jovyan
+# Ensure matplotlib config dir is writable
+RUN mkdir -p /home/jovyan/.config/matplotlib && \
+    chown -R jovyan:users /home/jovyan/.config
+
+ENV MPLCONFIGDIR=/home/jovyan/.config/matplotlib
+
+# Set working directory and copy files
+WORKDIR /home/jovyan/work
 COPY --chown=jovyan:users . .
-RUN chown -R jovyan:users /home/jovyan
 
-# Install packages directly into base environment
 USER jovyan
-RUN mamba env update -n base -f environment.yml && conda clean --all -y
 
-# OPTIONAL: Remove the default kernel and re-register it to avoid mismatches
-RUN python -m ipykernel install --user --name=python3 --display-name "Python 3 (ipykernel)" --overwrite
+# Update the base env (do not create a new env)
+RUN mamba env update -n base -f environment.yml && conda clean --all -y
 
 EXPOSE 8888
 CMD ["start-notebook.sh", "--NotebookApp.token=''", "--NotebookApp.password=''"]
