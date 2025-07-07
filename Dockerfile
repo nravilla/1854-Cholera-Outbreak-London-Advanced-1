@@ -15,7 +15,6 @@ RUN mkdir -p /home/jovyan/work/logs && \
 # Set matplotlib config path to a writable directory
 ENV MPLCONFIGDIR=/home/jovyan/.config/matplotlib
 
-
 # Switch back to jovyan for the rest of the build
 USER jovyan
 
