@@ -1,4 +1,4 @@
-name : advanced1
+name: base
 channels:
   - conda-forge
 channel_priority: strict
