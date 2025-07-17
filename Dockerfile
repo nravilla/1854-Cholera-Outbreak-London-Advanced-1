@@ -1,24 +1,31 @@
+# Use an official Jupyter Notebook base image
 FROM jupyter/base-notebook
 
+# Switch to root to install packages
 USER root
 
-# Install mamba
-RUN conda install -n base -c conda-forge mamba -y
+# Copy environment file and install Mamba for faster dependency solving
+COPY environment.yml /tmp/environment.yml
+RUN conda install -n base -c conda-forge mamba -y && \
+    mamba env update -n base -f /tmp/environment.yml && \
+    conda clean --all -y
 
-# Ensure matplotlib config dir is writable
+# Set matplotlib config and conda cache dir permissions
 RUN mkdir -p /home/jovyan/.config/matplotlib && \
-    chown -R jovyan:users /home/jovyan/.config
+    mkdir -p /home/jovyan/.cache/conda/notices && \
+    chown -R jovyan:users /home/jovyan/.config /home/jovyan/.cache
 
-ENV MPLCONFIGDIR=/home/jovyan/.config/matplotlib
-
-# Set working directory and copy files
-WORKDIR /home/jovyan/work
-COPY --chown=jovyan:users . .
-
+# Switch back to jovyan user
 USER jovyan
 
-# Update the base env (do not create a new env)
-RUN mamba env update -n base -f environment.yml && conda clean --all -y
+# Set the working directory inside the container
+WORKDIR /home/jovyan/work
 
+# Copy the project files into the container
+COPY --chown=jovyan:users . .
+
+# Expose the default Jupyter Notebook port
 EXPOSE 8888
+
+# Start Jupyter Notebook without token or password
 CMD ["start-notebook.sh", "--NotebookApp.token=''", "--NotebookApp.password=''"]
